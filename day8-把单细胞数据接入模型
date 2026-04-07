@@ -1,0 +1,7 @@
+1. 我今天完成了什么
+1. 把AnnData里的表达矩阵转化为tensor
+2. 把tensor接入模型
+2. 我仍然不懂什么（至少1条）
+X_tensor = torch.tensor(X_np, dtype = torch.float32)为什么要指定数据类型为float32？PyTorch 默认计算用 float32，如果是 float64 可能报错或效率低
+3. 今天最重要的3个概念
+没什么重要的，感觉之前都学过了，都能看懂
