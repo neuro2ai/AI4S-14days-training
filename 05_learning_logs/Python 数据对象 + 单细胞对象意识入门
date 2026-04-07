@@ -1,0 +1,49 @@
+今日学习记录
+1. 我今天完成了什么
+• 数据转化list、numpy.array、dataframe
+• 构建注释表
+2. 我仍然不懂什么
+• 数据框相比于数组，在缺失值处理和数据分析上的优势是什么
+• 除了这三个数据类型之外，还有什么类型，如何根据应用场景选择不同的类型
+
+3. 今天最重要的 3 个概念
+• list是表格，numpy.ndarray是N维数组，转化：data_array = np.array(data_list),查看：print(type(data_array))
+• 把矩阵变成带标签的 DataFrame: expr_df = pd.DataFrame(data_array, index=cells, columns=genes),，此时的类型是pandas.core.frame.DataFrame，shape不变
+• 查看前几行数据：expr_df.head()
+• 生成注释表cell_metadata = pd.DataFrame({"cell_type": ["NSC", "NSC", "Neuron", "Neuron", "Glia"],"sample": ["S1", "S1", "S1", "S2", "S2"]}, index=cells)行索引是cells，一列是cell_type细胞类型,一列是sample样本来源，生成(5,2)的注释表。表达矩阵负责存每个细胞中每个基因的数值，注释表负责存每个细胞的标签信息，单细胞分析经常把这两个连起来用
+4. 我现在能不能给别人讲清楚这部分
+• 我能讲清楚的部分是：数据类型的转化（表格list（是容器不是表格）、数组numpy array（能计算），数据框dataframe（能分析），表达矩阵与注释表的组成
+• 我讲不清楚的部分是：数据框相比于数组，在缺失值处理和数据分析上的优势是什么。答：缺失值处理：在 Array 中，如果混入一个缺失值，很多数学运算（如 mean, sum）会直接报错或返回 NaN。在 DataFrame 中，你可以轻松使用 df.dropna()（删掉有缺失的细胞）或 df.fillna(0)（把缺失补为0）。它能记录哪些地方是空的，而不会导致整个程序崩溃。数据分析：Array：你想看第 5 个基因，你得记住它是第几列（比如 data[:, 4]）。如果记错了，数据就全乱了。DataFrame：你直接搜基因名 expr_df['GAPDH']。这种“带标签”的操作极大地降低了生信分析中出错的概率。
+数据类型
+它是干什么的？
+应用场景
+
+list
+最基础容器，用来存数据
+存基因名、细胞名、简单数据
+
+numpy.ndarray
+数值矩阵，用来做计算
+表达矩阵计算、矩阵运算、后续模型输入
+
+pandas.DataFrame
+带行列标签的表格，用来分析数据
+单细胞表达矩阵、注释表、统计分析
+
+pandas.Series
+一维带标签数据
+一列基因表达、一个细胞的表达谱
+
+dict
+组织多个对象的结构
+临时组合数据（类似简化版 AnnData）
+
+AnnData（后面会学）
+单细胞专用数据结构（X+obs+var）
+scanpy、单细胞分析标准对象
+
+tensor（后面会学）
+可用于深度学习的数组（带梯度）
+PyTorch 模型输入
+
+只存数据用list，做数值运算用numpy.array，做数据分析用dataframe，做单细胞整体分析用anndata
